@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   mouseMoveStatus();
 });
+
 function mouseMoveStatus() {
   let coords = document.querySelector(".coords");
   let status = document.querySelector(".status");

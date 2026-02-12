@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    <title>iLoveU</title>
+  </head>
+  <body>
+    <script>
+      let newObj;
+      function preload() {
+        newObj = loadModel("images/hearts.obj", true);
+      }
+      function setup() {
+        createCanvas(windowWidth, windowHeight, WEBGL);
+
+        angleMode(DEGREES);
+        noFill();
+
+        stroke(250, 170, 200);
+        strokeWeight(100);
+
+        describe(
+          "Users can click on the screen and drag to adjust their perspective in 3D space. The space contains a sphere of dark purple cubes on a light pink background.",
+        );
+      }
+      function draw() {
+        background("lightGray");
+        ambientLight(255); // white light
+        // ambientMaterial(255, 127, 80); // coral
+        // normalMaterial();
+        scale(2, 2, 2);
+        for (let zAngle = 0; zAngle < 180; zAngle += 30) {
+          // Rotate cubes in a full circle to create a ring of cubes
+          for (let xAngle = 0; xAngle < 360; xAngle += 30) {
+            push();
+
+            // // Rotate from center of sphere
+            // rotateZ(zAngle);
+            // rotateX(xAngle);
+            rotateZ(frameCount * 0.0);
+            rotateX(frameCount * 0.0);
+            rotateY(frameCount * 0.04);
+
+            // Then translate down 400 units
+            // translate(0, 400, 0);
+            // box();
+            // pop();
+          }
+
+          //   djfhsaohf
+        }
+        model(newObj);
+
+        // click+drag on canvas to look around the shape
+        orbitControl();
+      }
+    </script>
+  </body>
+</html>
