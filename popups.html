@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Click the button to trigger the popup!</p>
+    <button>Open Popup</button>
+
+    <button id="btn">хз чд</button>
+
+    <script>
+      // попап
+      let pop = document.querySelector("button");
+      pop.addEventListener("click", function () {
+        let newWindow = window.open("", "Example", "width=400,height=400");
+        newWindow.document.write("<h1>Welcome to our popup!</h1> ");
+      });
+
+      //   модальное окно
+      let btn = document.querySelector("#btn");
+      btn.addEventListener("click", () => {
+        let myWindow = window.open(
+          "",
+          "newWindow",
+          "width=500,height=500,left=400,top=300",
+        );
+        myWindow.document.write('<input id="new-input"></input>');
+        getInput = myWindow.document.querySelector("#new-input");
+        setInterval(() => {
+          getInput.onfocus = () => {
+            myWindow.document.write("<p>Пора учить JavaScript</p>");
+          };
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
