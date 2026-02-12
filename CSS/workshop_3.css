@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 600px;
+  background-color: rgb(211, 204, 211);
+  font-size: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* button {
+  font-size: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(221, 236, 236);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid black;
+}
+
+#demo {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+/* сначала "главное" свойство */
+.circle {
+  border-radius: 100%;
+  background-color: black;
+  transition: all 1s ease;
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+}
+/* затем те, которые изначально */
+.small {
+  height: 100px;
+  width: 100px;
+}
+.blue {
+  background-color: blue;
+}
+
+/* а здесь те, на которые заменяем */
+.big {
+  height: 50vw;
+  width: 50vw;
+}
+
+.pink {
+  background-color: rgba(100, 39, 185, 0.431);
+}
+
+.square {
+  border-radius: 0;
+}
+
+/* workshop3
+сначала "главное" свойство */
+.circle {
+  border-radius: 100%;
+  background-color: black;
+  transition: all 1s ease;
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+}
+/* затем те, которые изначально */
+.white {
+  background-color: white;
+}
+
+/* а здесь те, на которые заменяем */
+
+.black {
+  background-color: black;
+}

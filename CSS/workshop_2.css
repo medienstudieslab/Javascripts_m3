@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 600px;
+  background-color: rgb(225, 225, 225); /* свой цвет фона*/
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* сначала "главное" свойство */
+.circle {
+  border-radius: 100%;
+  background-color: black;
+  transition: all 2s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* те, которые в начале анимации и которые перепишутся */
+.small {
+  height: 100px;
+  width: 100px;
+}
+.blue {
+  background-color: blue;
+}
+
+/* а здесь те, на которые заменяем */
+.big {
+  height: 40vw;
+  width: 40vw;
+}
+
+.pink {
+  background-color: rgb(255, 0, 93);
+}
+
+.square {
+  border-radius: 0;
+}
