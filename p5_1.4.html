@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    <title>пробел to pause</title>
+  </head>
+  <body>
+    <script>
+      let circles = [];
+      let stop = false;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+      }
+
+      function mousePressed() {
+        circles.push({
+          x: mouseX,
+          y: mouseY,
+          size: 10,
+          r: random(255),
+          g: random(255),
+          b: random(255),
+          blur: 0,
+        });
+      }
+
+      function keyPressed() {
+        if (key === " ") {
+          stop = !stop; // стоп/старт роста
+        }
+      }
+
+      function draw() {
+        background(225);
+
+        for (let c of circles) {
+          drawingContext.filter = `blur(${c.blur}px)`;
+          fill(c.r, c.g, c.b);
+          circle(c.x, c.y, c.size);
+
+          if (!stop) {
+            c.size += 1;
+
+            c.blur += 0.2;
+          }
+        }
+
+        drawingContext.filter = "none";
+      }
+    </script>
+  </body>
+</html>

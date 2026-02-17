@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    <title>круги пык пык пык</title>
+  </head>
+  <body>
+    <script>
+      let circles = [];
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+      }
+
+      function mousePressed() {
+        circles.push({
+          x: mouseX,
+          y: mouseY,
+          size: 10,
+          r: random(255),
+          g: random(255),
+          b: random(255),
+        });
+      }
+
+      function draw() {
+        background(225);
+
+        for (let c of circles) {
+          fill(c.r, c.g, c.b);
+          circle(c.x, c.y, c.size);
+          c.size += 1; // рост
+        }
+      }
+    </script>
+  </body>
+</html>
