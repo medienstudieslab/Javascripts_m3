@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    <title>waterdrops</title>
+  </head>
+  <body>
+    <div
+      style="
+        position: absolute;
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <p
+        style="
+          position: absolute;
+          font-family: Arial, Helvetica, sans-serif;
+          user-select: none;
+        "
+      >
+        click to place your waterdrop
+      </p>
+    </div>
+    <script>
+      let mouseSeen = false;
+
+      let circles = [];
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+        background(225);
+        // colorMode(HSB);
+      }
+
+      function mousePressed() {
+        circles.push({
+          x: mouseX,
+          y: mouseY,
+          size: 10,
+          r: random(255),
+          g: random(255),
+          b: random(255),
+          blur: 0,
+        });
+        mouseSeen = true;
+      }
+
+      function draw() {
+        if (!mouseSeen) return;
+
+        for (let c of circles) {
+          drawingContext.filter = `blur(${c.blur}px)`;
+          fill(c.r, c.g, c.b, 200);
+          circle(c.x, c.y, c.size);
+
+          c.y += 1;
+          c.size += 0.01;
+          c.blur += 0.1; // чем старше круг — тем сильнее размытие
+        }
+
+        drawingContext.filter = "none"; // сброс
+      }
+    </script>
+  </body>
+</html>

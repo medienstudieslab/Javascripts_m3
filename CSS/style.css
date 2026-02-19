@@ -18,6 +18,11 @@ p {
 a {
   color: black;
   cursor: pointer;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+  background-color: yellow;
 }
 
 .folder {
