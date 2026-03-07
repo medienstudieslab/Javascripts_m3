@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    <title>растущий рандомного цвета круг</title>
+  </head>
+  <body>
+    <script>
+      let points = [];
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+
+        // создаём 40 случайных стартовых точек
+        for (let i = 0; i < 40; i++) {
+          points.push({
+            x: random(width),
+            y: random(height),
+          });
+        }
+      }
+
+      function draw() {
+        background(0);
+
+        stroke(255);
+        strokeWeight(1);
+
+        for (let p of points) {
+          line(p.x, p.y, mouseX, mouseY);
+        }
+      }
+    </script>
+  </body>
+</html>

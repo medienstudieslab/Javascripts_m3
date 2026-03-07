@@ -1,0 +1,15 @@
+body {
+  background-color: lightgrey;
+}
+
+.oval {
+  width: 40vw;
+  height: 20vw;
+  background-color: brown;
+  border-radius: 100%;
+  display: block;
+}
+
+.hide {
+  display: none;
+}

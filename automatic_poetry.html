@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+      "
+    >
+      <div
+        id="stack"
+        style="
+          width: 500px;
+          min-height: 300px;
+          border: 1px solid #ccc;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          overflow: hidden;
+          font-size: 20px;
+          line-height: 1.4;
+        "
+      ></div>
+    </div>
+
+    <script>
+      // Твой большой текст
+      const textBlock = `
+Dame da ne dame yo dame na no yo.
+Anta ga sukide sukisugite.
+Dore dake tsuyoi osake demo.
+Yugamanai omoide ga baka mitai.
+Honma ni roku na otoko ya nai.
+Soroi no yubiwa hazushimasu.
+Zamaa miro seisei suru wa.
+Nan nano yo kono namida baka mitai.
+  `;
+
+      // Разделение на предложения
+      const sentences = textBlock
+        .split(/(?<=[.!?])\s+/) // разделяем по . ! ? + пробел
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0);
+
+      const stack = document.getElementById("stack");
+      let index = 0;
+
+      function addNextSentence() {
+        if (index >= sentences.length) return;
+
+        const el = document.createElement("div");
+        el.textContent = sentences[index];
+        el.style.background = "#f0f0f0";
+        el.style.padding = "10px";
+        el.style.borderRadius = "6px";
+
+        stack.append(el);
+        index++;
+      }
+
+      // Каждую секунду добавляем новое предложение
+      setInterval(addNextSentence, 4000);
+    </script>
+  </body>
+</html>

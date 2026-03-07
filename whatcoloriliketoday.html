@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>what color I like today</title>
+  </head>
+  <body>
+    <div class="overscr">
+      <p>from 1 to 10 seconds of "hmmm..."</p>
+    </div>
+    <section>
+      <div class="color-block col-1"></div>
+      <div class="color-block col-2"></div>
+      <div class="color-block col-3"></div>
+      <div class="color-block col-4"></div>
+      <div class="color-block col-5"></div>
+      <div class="color-block col-6"></div>
+      <div class="color-block col-7"></div>
+      <div class="color-block col-8"></div>
+      <div class="color-block col-9"></div>
+      <div class="color-block col-10"></div>
+      <div class="color-block col-11"></div>
+      <div class="color-block col-12"></div>
+    </section>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 3000px;
+        background-color: rgb(255, 255, 255);
+      }
+      .overscr {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 10;
+      }
+
+      section {
+        position: relative;
+        left: -20vw;
+        width: 600px;
+        height: 400px;
+      }
+
+      p {
+        color: black;
+      }
+
+      .color-block {
+        width: 140vw;
+        height: 200px;
+
+        position: relative;
+        filter: blur(80px);
+        /* mix-blend-mode: multiply; */
+      }
+
+      .col-1 {
+        height: 600px;
+        background-color: antiquewhite;
+      }
+      .col-2 {
+        top: -50px;
+        height: 600px;
+        background-color: plum;
+      }
+      .col-3 {
+        top: -150px;
+        height: 500px;
+        background-color: AliceBlue;
+      }
+      .col-4 {
+        top: -250px;
+        height: 700px;
+        background-color: BurlyWood;
+      }
+      .col-5 {
+        top: -300px;
+        height: 800px;
+        background-color: DarkOrange;
+      }
+      .col-6 {
+        top: -350px;
+        height: 1200px;
+        background-color: CornflowerBlue;
+      }
+      .col-7 {
+        top: -400px;
+        height: 700px;
+        background-color: DarkOliveGreen;
+      }
+      .col-8 {
+        top: -450px;
+        height: 400px;
+        background-color: Gainsboro;
+      }
+      .col-9 {
+        top: -500px;
+        height: 400px;
+        background-color: LemonChiffon;
+      }
+      .col-10 {
+        top: -550px;
+        height: 600px;
+        background-color: HotPink;
+      }
+      .col-11 {
+        top: -600px;
+        height: 400px;
+        background-color: Peru;
+      }
+      .col-12 {
+        top: -650px;
+        height: 800px;
+        background-color: GreenYellow;
+      }
+    </style>
+
+    <script>
+      const fullHeight = document.documentElement.scrollHeight;
+
+      function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function randomScroll() {
+        window.scroll({
+          top: Math.random() * fullHeight,
+          behavior: "smooth",
+        });
+
+        setTimeout(randomScroll, randomInt(1000, 10000));
+      }
+
+      randomScroll();
+    </script>
+  </body>
+</html>

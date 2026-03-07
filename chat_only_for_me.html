@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+      "
+    >
+      <input
+        id="wordInput"
+        placeholder="Введите слово"
+        style="font-size: 24px; padding: 10px 20px; text-align: center"
+      />
+
+      <div
+        id="stack"
+        style="
+          width: 400px;
+          min-height: 300px;
+          border: 1px solid #ccc;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          overflow: hidden;
+        "
+      ></div>
+    </div>
+
+    <script>
+      const input = document.getElementById("wordInput");
+      const stack = document.getElementById("stack");
+
+      function spawn() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        const el = document.createElement("div");
+        el.textContent = text;
+        el.style.padding = "10px";
+        el.style.background = "#f0f0f0";
+        el.style.borderRadius = "6px";
+        el.style.fontSize = "20px";
+
+        stack.prepend(el);
+
+        // очищаем поле и возвращаем фокус
+        input.value = "";
+        input.placeholder = "Введите новое слово";
+        input.focus();
+      }
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") spawn();
+      });
+    </script>
+  </body>
+</html>

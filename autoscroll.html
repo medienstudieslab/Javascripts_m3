@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="overscr"></div>
+    <div class="color-block rd"></div>
+    <div class="color-block gr"></div>
+    <div class="color-block bl"></div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 3000px;
+        background-color: black;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .overscr {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 10;
+      }
+      p {
+        color: white;
+
+        font-size: 24px;
+        user-select: none;
+      }
+
+      div {
+        width: 100vw;
+        height: 1000px;
+      }
+      .rd {
+        background-color: red;
+      }
+      .gr {
+        background-color: green;
+      }
+      .bl {
+        background-color: blue;
+      }
+    </style>
+
+    <script>
+      let timer = document.createElement("p");
+      let seconds = 0;
+
+      timer.classList.add("asad");
+
+      const timerBlock = document.querySelector(".overscr");
+      timerBlock.appendChild(timer);
+
+      const fullHeight = document.documentElement.scrollHeight;
+
+      setInterval(() => {
+        window.scroll({
+          top: Math.random() * fullHeight,
+          behavior: "smooth",
+        });
+        seconds++;
+        timer.textContent = seconds;
+      }, 1000);
+
+      // таймер реальный
+      // const start = performance.now();
+      // function updateTimer() {
+      //   const seconds = ((performance.now() - start) / 1000).toFixed(1);
+      //   timer.textContent = seconds + "s";
+      //   requestAnimationFrame(updateTimer);
+      // }
+      // updateTimer();
+    </script>
+  </body>
+</html>
