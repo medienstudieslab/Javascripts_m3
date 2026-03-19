@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="cards">
+      <div class="main-cover">
+        <h1 class="p-cards">Item</h1>
+        <div class="modes">
+          <img class="cat" src="images/cat/kitty.jpeg" alt="mode1" />
+
+          <div class="checkboxes">
+            <label
+              ><span>бантик</span
+              ><input type="checkbox" class="check-mode" data-option="bow"
+            /></label>
+            <label
+              ><span>очки</span
+              ><input type="checkbox" class="check-mode" data-option="glasses"
+            /></label>
+            <label
+              ><span>рыбка</span
+              ><input type="checkbox" class="check-mode" data-option="fish"
+            /></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .cards {
+        display: flex;
+        justify-content: center;
+      }
+      .checkboxes {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+
+    <script>
+      function setupCard(containerClass, imgClass, checkboxesClass, variants) {
+        const container = document.querySelector(`.${containerClass}`);
+        const img = container.querySelector(`.${imgClass}`);
+        // const frame = container.querySelector(".frame-sec2");
+        const checkboxes = container.querySelectorAll(`.${checkboxesClass}`);
+
+        const originalImgSrc = img.src;
+        const originalFrameSrc = frame.src;
+        const newFrameSrc = "img/frame-sec2-big.svg";
+
+        const bigFrame = document.createElement("img");
+        bigFrame.src = newFrameSrc;
+        bigFrame.className = "frame-sec2-big";
+        bigFrame.style.display = "none";
+        container.insertBefore(bigFrame, frame.nextSibling);
+
+        // Обработчики для фрейма
+        // container.addEventListener("mouseenter", () => {
+        //   frame.style.display = "none";
+        //   bigFrame.style.display = "block";
+        // });
+
+        // container.addEventListener("mouseleave", () => {
+        //   frame.style.display = "block";
+        //   bigFrame.style.display = "none";
+        // });
+
+        // Обработчики для чекбоксов
+        checkboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", function () {
+            updateImage(img, checkboxes, variants, originalImgSrc);
+          });
+        });
+      }
+      function updateImage(imgElement, checkboxes, variants, originalSrc) {
+        const selectedOptions = Array.from(checkboxes)
+          .filter((cb) => cb.checked)
+          .map((cb) => cb.dataset.option)
+          .sort()
+          .join("_");
+
+        imgElement.src = variants[selectedOptions] || originalSrc;
+      }
+      const kittyModes = {
+        bow: "images/cat/bow.png",
+        glasses: "images/cat/glasses.png",
+        fish: "images/cat/fish.png",
+        bow_glasses: "images/cat/bow glasses.png",
+        bow_fish: "images/cat/bow fish.png",
+        glasses_fish: "images/cat/glasses fish.png",
+        bow_glasses_fish: "images/cat/bow glasses fish.png",
+      };
+      setupCard("modes", "cat", "check-mode", kittyModes);
+    </script>
+  </body>
+</html>

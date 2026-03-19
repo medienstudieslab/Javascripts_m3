@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>onboard overlay</title>
+  </head>
+  <body>
+    <div id="cover-image"></div>
+    <!-- <p id="open-onboarding">+</p> -->
+    <button id="open-onboarding">+</button>
+    <div class="onboarding closed">
+      <p class="subtitles">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis et
+        explicabo officia tempore doloremque tenetur omnis qui cumque inventore.
+        Esse iure aut libero porro? Distinctio qui totam error nesciunt id?
+      </p>
+      <p class="whatToDo">этап 3.проявление</p>
+    </div>
+
+    <style>
+      /* * {
+        margin: 0;
+        padding: 0;
+      } */
+
+      .closed {
+        display: none;
+      }
+      .opened {
+        display: block;
+      }
+
+      /* #cover-image {
+        height: 100vh;
+        width: 100vw;
+        background-image: url("images/dada.jpg");
+        background-size: cover;
+      } */
+      #open-onboarding {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+      }
+
+      .onboarding {
+        position: fixed;
+        width: 1440px;
+        height: 1024px;
+      }
+
+      .subtitles {
+        width: 75%;
+        height: 100vh;
+        text-align: center;
+        position: fixed;
+        margin-bottom: 24px;
+        top: 140%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .whatToDo {
+        position: fixed;
+        margin-bottom: 24px;
+        top: 24px;
+        left: 24px;
+      }
+    </style>
+    <script>
+      let btnOnboarding = document.querySelector("#open-onboarding");
+      let overScr = document.querySelector(".onboarding");
+      let plusCross = document.querySelector("");
+
+      btnOnboarding.addEventListener("click", () => {
+        overScr.classList.toggle("opened");
+      });
+    </script>
+  </body>
+</html>

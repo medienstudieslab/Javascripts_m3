@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="section-7">
+      <div class="button-container">
+        <div class="button">
+          <p class="button-text">кнопка</p>
+        </div>
+        <div class="blur-light"></div>
+      </div>
+
+      <div id="errorModal" class="modal" style="display: none; opacity: 0">
+        <div class="modal-content" style="transform: scale(0.9)">
+          <span class="close">×</span>
+          <p class="error">ошибка</p>
+          <p id="error1">переделывай</p>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .section-7 {
+        height: 100vh;
+        width: 100%;
+      }
+
+      .button-container {
+        position: relative;
+        width: 26vw;
+        height: 8vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: transform 0.3s ease;
+      }
+
+      .button {
+        width: 100%;
+        height: 100%;
+        background: rgb(0, 0, 0);
+        opacity: 0.79;
+
+        border-radius: 25px;
+        z-index: 2;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .blur-light {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.79;
+        border: 2px solid #ffffff;
+        filter: blur(7.55px);
+        border-radius: 25px;
+        z-index: 1;
+      }
+
+      .button-text {
+        font-family: "LeagueGothic";
+        font-size: 7vw;
+        color: white;
+        margin: 0;
+        z-index: 3;
+        position: relative;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-content {
+        background-color: #f00;
+        color: white;
+        margin: 15% auto;
+        padding: 20vw;
+        width: 50%;
+        text-align: center;
+        font-size: 2em;
+
+        border-radius: 1vw;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .close {
+        color: white;
+        position: absolute;
+        right: 2vw;
+        top: 1vw;
+        font-size: 3vw;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: black;
+      }
+    </style>
+
+    <script>
+      const buttonContainer = document.querySelector(
+        ".section-7 .button-container",
+      );
+      const modal = document.getElementById("errorModal");
+
+      if (buttonContainer && modal) {
+        const closeBtn = modal.querySelector(".close");
+
+        // Обработчик клика по кнопке
+        buttonContainer.addEventListener("click", function (e) {
+          e.stopPropagation();
+          modal.style.display = "block";
+          document.body.style.overflow = "hidden";
+
+          setTimeout(() => {
+            modal.style.opacity = "1";
+            modal.querySelector(".modal-content").style.transform = "scale(1)";
+          }, 10);
+        });
+
+        // Обработчик клика по крестику
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            closeModal();
+          });
+        }
+
+        // Обработчик клика вне модального окна
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+          modal.style.opacity = "0";
+          modal.querySelector(".modal-content").style.transform = "scale(0.9)";
+          document.body.style.overflow = "";
+
+          setTimeout(() => {
+            modal.style.display = "none";
+          }, 300);
+        }
+      }
+    </script>
+  </body>
+</html>

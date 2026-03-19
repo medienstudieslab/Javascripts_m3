@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #app {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      const container = document.getElementById("app");
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      container.appendChild(renderer.domElement);
+
+      const loader = new THREE.TextureLoader();
+      const texture = loader.load("images/i.jpeg");
+      const disp = loader.load("images/plat.jpg");
+
+      disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
+
+      const uniforms = {
+        uTexture: { value: texture },
+        uDisp: { value: disp },
+        uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+        uStrength: { value: 0.15 },
+      };
+
+      const material = new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = vec4(position, 1.0);
+    }
+  `,
+        fragmentShader: `
+    varying vec2 vUv;
+
+    uniform sampler2D uTexture;
+    uniform sampler2D uDisp;
+    uniform vec2 uMouse;
+    uniform float uStrength;
+
+    void main() {
+      float dist = distance(vUv, uMouse);
+
+      float influence = smoothstep(0.3, 0.0, dist);
+
+      vec2 disp = texture2D(uDisp, vUv).rg * 2.0 - 1.0;
+
+      vec2 displacedUV = vUv + disp * influence * uStrength;
+
+      gl_FragColor = texture2D(uTexture, displacedUV);
+    }
+  `,
+      });
+
+      const geometry = new THREE.PlaneGeometry(2, 2);
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      window.addEventListener("mousemove", (e) => {
+        uniforms.uMouse.value.x = e.clientX / window.innerWidth;
+        uniforms.uMouse.value.y = 1.0 - e.clientY / window.innerHeight;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>

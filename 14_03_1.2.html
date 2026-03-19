@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="image-wrapper">
+      <img src="https://picsum.photos/800/500" class="image" />
+      <div class="magnifier"></div>
+    </div>
+    <style>
+      .image-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      .image {
+        width: 800px;
+        height: auto;
+        display: block;
+      }
+
+      .magnifier {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        pointer-events: none;
+        border: 3px solid white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        background-repeat: no-repeat;
+        background-size: 1600px 1000px; /* увеличенная картинка */
+        display: none; /* скрыта пока мышь не наведена */
+      }
+    </style>
+    <script>
+      const img = document.querySelector(".image");
+      const magnifier = document.querySelector(".magnifier");
+
+      img.addEventListener("mouseenter", () => {
+        magnifier.style.display = "block";
+      });
+
+      img.addEventListener("mouseleave", () => {
+        magnifier.style.display = "none";
+      });
+
+      img.addEventListener("mousemove", (e) => {
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const zoom = 2; // коэффициент увеличения
+        const size = 150;
+
+        magnifier.style.left = `${x - size / 2}px`;
+        magnifier.style.top = `${y - size / 2}px`;
+
+        magnifier.style.backgroundImage = `url(${img.src})`;
+        magnifier.style.backgroundSize = `${img.width * zoom}px ${img.height * zoom}px`;
+        magnifier.style.backgroundPosition = `-${x * zoom - size / 2}px -${y * zoom - size / 2}px`;
+      });
+    </script>
+  </body>
+</html>

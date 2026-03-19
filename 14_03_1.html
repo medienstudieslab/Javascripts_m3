@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="displaceImage"></canvas>
+
+    <img id="img" src="images/i.jpeg" style="display: none" />
+
+    <script>
+      let canvas = document.getElementById("displaceImage");
+      let ctx = canvas.getContext("2d");
+      let img = document.getElementById("img");
+
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+      };
+
+      canvas.addEventListener("mousemove", (e) => {
+        let rect = canvas.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+
+        ctx.drawImage(img, 0, 0);
+
+        let radius = 50;
+        let zoom = 4;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.clip();
+
+        ctx.drawImage(
+          img,
+          x - radius / zoom,
+          y - radius / zoom,
+          (radius * 2) / zoom,
+          (radius * 2) / zoom,
+          x - radius,
+          y - radius,
+          radius * 2,
+          radius * 2,
+        );
+
+        ctx.restore();
+      });
+    </script>
+  </body>
+</html>
